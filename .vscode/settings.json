@@ -4,9 +4,7 @@
   "editor.codeActionsOnSave": {},
   "typescript.preferences.includePackageJsonAutoImports": "off",
   "typescript.suggest.autoImports": false,
-  "javascript.suggest.autoImports": false,
   "typescript.preferences.organizeImports": false,
-  "javascript.preferences.organizeImports": false,
   "typescript.format.enable": false,
   "javascript.format.enable": false,
   "sortImports.on-save": false,
@@ -22,12 +20,6 @@
   },
   "prettier.requireConfig": true,
   "prettier.resolveGlobalModules": false,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
