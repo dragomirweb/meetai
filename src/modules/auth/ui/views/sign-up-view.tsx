@@ -80,7 +80,7 @@ export const SignUpView = () => {
           },
         }
       )
-      .then(() => {
+      .finally(() => {
         setPending(false)
       })
   }
