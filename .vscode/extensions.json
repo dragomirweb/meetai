@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode"
+  ],
+  "unwantedRecommendations": [
+    "amatiasq.sort-imports",
+    "rvest.vs-code-prettier-eslint"
+  ]
+}
