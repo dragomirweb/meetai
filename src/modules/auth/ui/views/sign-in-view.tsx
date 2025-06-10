@@ -199,14 +199,14 @@ export const SignInView = () => {
             </form>
           </Form>
 
-          <div className="relative hidden flex-col items-center justify-center gap-y-4 bg-radial from-green-700 to-green-900 md:flex">
+          <div className="from-sidebar-accent to-sidebar relative hidden flex-col items-center justify-center gap-y-4 bg-radial md:flex">
             <img
               src="/logo.svg"
               alt="logo"
               className="h-[92px] w-[92px]"
             />
             <p className="text-2xl font-semibold text-white">
-              Ai.Conf
+              AIConf
             </p>
           </div>
         </CardContent>
