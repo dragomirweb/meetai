@@ -47,8 +47,13 @@ export const DashboardUserButton = () => {
 
   if (isPending || !data) {
     return (
-      <div className="flex h-[64px] items-center justify-center">
-        <Skeleton className="bg-primary/30 h-full w-full" />
+      <div className="border-border/10 flex h-[64px] w-full items-center justify-between gap-1 gap-x-2 overflow-hidden rounded-lg border bg-white/5 p-3">
+        <Skeleton className="bg-primary/30 size-9 rounded-full" />
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5 overflow-hidden">
+          <Skeleton className="bg-primary/30 h-4 w-24" />
+          <Skeleton className="bg-primary/30 h-3 w-32" />
+        </div>
+        <ChevronDownIcon className="size-4 shrink-0" />
       </div>
     )
   }
