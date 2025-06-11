@@ -9,9 +9,7 @@ import { useTRPC } from '@/trpc/client'
 
 export const AgentsView = () => {
   const trpc = useTRPC()
-  const { data } = useQuery(
-    trpc.agents.getMany.queryOptions()
-  )
+  const { data } = useQuery(trpc.agents.getMany.queryOptions())
 
   return <div>{JSON.stringify(data, null, 2)}</div>
 }
@@ -27,9 +25,6 @@ export const AgentsViewLoading = () => {
 
 export const AgentsViewError = () => {
   return (
-    <ErrorState
-      title="Error loading agents"
-      message="Please try again later"
-    />
+    <ErrorState title="Error loading agents" message="Please try again later" />
   )
 }
