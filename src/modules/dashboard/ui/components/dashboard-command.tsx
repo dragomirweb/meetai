@@ -7,7 +7,7 @@ import {
   CommandResponsiveDialog,
 } from '@/components/ui/command'
 
-type Props = {
+interface Props {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
