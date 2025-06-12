@@ -1,13 +1,6 @@
-import {
-  botttsNeutral,
-  initials,
-} from '@dicebear/collection'
+import { botttsNeutral, initials } from '@dicebear/collection'
 import { createAvatar } from '@dicebear/core'
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@radix-ui/react-avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 
 import { cn } from '@/lib/utils'
 
@@ -38,9 +31,7 @@ export const GeneratedAvatar = ({
   return (
     <Avatar className={cn(className)}>
       <AvatarImage src={avatar.toDataUri()} alt="Avatar" />
-      <AvatarFallback>
-        {seed.charAt(0).toUpperCase()}
-      </AvatarFallback>
+      <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
   )
 }
