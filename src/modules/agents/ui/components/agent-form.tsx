@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Loader2Icon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import z from 'zod'
@@ -124,6 +125,7 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: Props) => {
           )}
 
           <Button type="submit" disabled={isPending}>
+            {isPending && <Loader2Icon className="animate-spin" />}
             {isEdit ? 'Update' : 'Create'}
           </Button>
         </div>
