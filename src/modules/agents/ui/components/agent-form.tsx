@@ -122,11 +122,10 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: Props) => {
               Cancel
             </Button>
           )}
-          {onSuccess && (
-            <Button type="submit" disabled={isPending}>
-              {isEdit ? 'Update' : 'Create'}
-            </Button>
-          )}
+
+          <Button type="submit" disabled={isPending}>
+            {isEdit ? 'Update' : 'Create'}
+          </Button>
         </div>
       </form>
     </Form>
