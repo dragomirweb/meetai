@@ -1,9 +1,4 @@
-import {
-  boolean,
-  pgTable,
-  text,
-  timestamp,
-} from 'drizzle-orm/pg-core'
+import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { nanoid } from 'nanoid'
 
 export const user = pgTable('user', {
@@ -45,12 +40,8 @@ export const account = pgTable('account', {
   accessToken: text('access_token'),
   refreshToken: text('refresh_token'),
   idToken: text('id_token'),
-  accessTokenExpiresAt: timestamp(
-    'access_token_expires_at'
-  ),
-  refreshTokenExpiresAt: timestamp(
-    'refresh_token_expires_at'
-  ),
+  accessTokenExpiresAt: timestamp('access_token_expires_at'),
+  refreshTokenExpiresAt: timestamp('refresh_token_expires_at'),
   scope: text('scope'),
   password: text('password'),
   createdAt: timestamp('created_at').notNull(),
@@ -75,7 +66,6 @@ export const agents = pgTable('agents', {
     .primaryKey()
     .$defaultFn(() => nanoid()),
   name: text('name').notNull(),
-  description: text('description').notNull(),
   instructions: text('instructions').notNull(),
   userId: text('user_id')
     .notNull()
