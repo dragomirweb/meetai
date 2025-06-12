@@ -22,8 +22,8 @@ export const agentsRouter = createTRPCRouter({
 
       return agent
     }),
-  getMany: protectedProcedure.query(async () => {
-    return db.select().from(agents)
+  getMany: protectedProcedure.query(async ({ ctx }) => {
+    return db.select().from(agents).where(eq(agents.userId, ctx.auth.user.id))
   }),
   create: protectedProcedure
     .input(agentsInsertSchema)
