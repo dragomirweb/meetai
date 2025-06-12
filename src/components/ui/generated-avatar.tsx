@@ -29,7 +29,9 @@ export const GeneratedAvatar = ({
   }
 
   return (
-    <Avatar className={cn(className)}>
+    <Avatar
+      className={cn('flex items-center justify-center text-center', className)}
+    >
       <AvatarImage src={avatar.toDataUri()} alt="Avatar" />
       <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
