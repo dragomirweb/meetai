@@ -31,7 +31,7 @@ export const AgentIdView = ({ agentId }: Props) => {
         onRemove={() => {}}
       />
       <div className="rounded-lg border bg-white">
-        <div className="col-span-5 flex flex-col gap-y-5 px-4 py-5">
+        <div className="flex flex-col gap-y-5 px-4 py-5">
           <div className="flex items-center gap-x-3">
             <GeneratedAvatar
               className="size-10 overflow-hidden rounded-full"
