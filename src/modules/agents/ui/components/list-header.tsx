@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { PlusIcon, XCircleIcon, XIcon } from 'lucide-react'
+import { PlusIcon, XCircleIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
