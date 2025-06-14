@@ -3,9 +3,7 @@ import { ChevronsUpDownIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
-  Command,
   CommandEmpty,
-  CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
@@ -30,12 +28,16 @@ export const CommandSelect = ({
   onSearch,
   value,
   placeholder = 'Select an option',
-  isSearchable,
   className,
 }: Props) => {
   const [open, setOpen] = useState(false)
 
   const selectedOption = options.find((option) => option.id === value) ?? null
+
+  const handleOpenChange = (open: boolean) => {
+    onSearch?.('')
+    setOpen(open)
+  }
 
   return (
     <>
@@ -55,7 +57,7 @@ export const CommandSelect = ({
       <CommandResponsiveDialog
         shouldFilter={!onSearch}
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={handleOpenChange}
       >
         <CommandInput placeholder="Search..." onValueChange={onSearch} />
         <CommandList>
