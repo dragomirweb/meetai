@@ -15,7 +15,7 @@ import { LoadingState } from '@/components/loading-state'
 import { Badge } from '@/components/ui/badge'
 import { GeneratedAvatar } from '@/components/ui/generated-avatar'
 
-import { useConfirm } from '@/modules/agents/hooks/use-confirm'
+import { useConfirm } from '@/hooks/use-confirm'
 import { AgentIdViewHeader } from '@/modules/agents/ui/components/agent-id-view-header'
 import { UpdateAgentDialog } from '@/modules/agents/ui/components/update-agent'
 import { useTRPC } from '@/trpc/client'
