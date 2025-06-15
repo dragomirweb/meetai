@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import {
-  // CallEndedEvent,
-  // CallRecordingReadyEvent,
+  CallEndedEvent,
+  CallRecordingReadyEvent,
   CallSessionParticipantLeftEvent,
   CallSessionStartedEvent,
-  // CallTranscriptionReadyEvent,
+  CallTranscriptionReadyEvent,
 } from '@stream-io/node-sdk'
 import { and, eq, not } from 'drizzle-orm'
 
 import { streamVideo } from '@/lib/stream-video'
 import { db } from '@/db/index'
 import { agents, meetings } from '@/db/schema'
+import { inngest } from '@/inngest/client'
 
 function verifySignatureWithSdk(body: string, signature: string): boolean {
   return streamVideo.verifyWebhook(body, signature)
@@ -50,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     if (!meetingId) {
       return NextResponse.json(
-        { error: 'Meeting ID is required' },
+        { error: 'Meeting ID is required - call.session_started' },
         { status: 400 }
       )
     }
@@ -91,11 +92,15 @@ export async function POST(request: NextRequest) {
 
     const call = streamVideo.video.call('default', meetingId)
 
-    const realtimeClient = await streamVideo.video.connectOpenAi({
-      call,
-      openAiApiKey: process.env.OPENAI_API_KEY!,
-      agentUserId: existingAgent.id,
-    })
+    const realtimeClient = await streamVideo.video
+      .connectOpenAi({
+        call,
+        openAiApiKey: process.env.AICONF_OPENAI_API_KEY!,
+        agentUserId: existingAgent.id,
+      })
+      .catch((err) => {
+        console.error('err creating realtime ai client', err)
+      })
 
     realtimeClient.updateSession({
       instructions: existingAgent.instructions,
@@ -113,6 +118,74 @@ export async function POST(request: NextRequest) {
 
     const call = streamVideo.video.call('default', meetingId)
     await call.end()
+  } else if (eventType === 'call.session_ended') {
+    const event = payload as CallEndedEvent
+    const meetingId = event.call.custom?.meetingId
+
+    if (!meetingId) {
+      return NextResponse.json(
+        { error: 'Meeting ID is required - call.session_ended' },
+        { status: 400 }
+      )
+    }
+
+    await db
+      .update(meetings)
+      .set({
+        status: 'processing',
+        endedAt: new Date(),
+      })
+      .where(and(eq(meetings.id, meetingId), eq(meetings.status, 'active')))
+  } else if (eventType === 'call.transcription_ready') {
+    const event = payload as CallTranscriptionReadyEvent
+    const meetingId = event.call_cid.split(':')[1]
+
+    if (!meetingId) {
+      return NextResponse.json(
+        { error: 'Meeting ID is required - transcription_ready' },
+        { status: 400 }
+      )
+    }
+
+    const [updatedMeeting] = await db
+      .update(meetings)
+      .set({
+        transcriptUrl: event.call_transcription.url,
+      })
+      .where(and(eq(meetings.id, meetingId)))
+      .returning()
+
+    inngest.send({
+      name: 'meetings/processing',
+      data: {
+        meetingId: updatedMeeting.id,
+        transcriptUrl: event.call_transcription.url,
+      },
+    })
+
+    if (!updatedMeeting) {
+      return NextResponse.json(
+        { error: 'Meeting not found - transcription_ready' },
+        { status: 404 }
+      )
+    }
+  } else if (eventType === 'call.recording_ready') {
+    const event = payload as CallRecordingReadyEvent
+    const meetingId = event.call_cid.split(':')[1]
+
+    if (!meetingId) {
+      return NextResponse.json(
+        { error: 'Meeting ID is required - transcription_ready' },
+        { status: 400 }
+      )
+    }
+
+    await db
+      .update(meetings)
+      .set({
+        recordingUrl: event.call_recording.url,
+      })
+      .where(and(eq(meetings.id, meetingId)))
   }
 
   return NextResponse.json({ message: 'ok' }, { status: 200 })
