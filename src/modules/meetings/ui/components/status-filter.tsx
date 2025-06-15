@@ -2,12 +2,11 @@ import {
   CircleCheckIcon,
   CircleXIcon,
   ClockArrowUpIcon,
-  LoaderIcon,
+  Loader2Icon,
   VideoIcon,
 } from 'lucide-react'
 
 import { CommandSelect } from '@/components/command-select'
-import { Button } from '@/components/ui/button'
 
 import { useMeetingsFilters } from '@/modules/meetings/hooks/use-meetings-filters'
 import { MeetingStatus } from '@/modules/meetings/types'
@@ -48,7 +47,7 @@ const options = [
     value: MeetingStatus.Processing,
     children: (
       <div className="flex items-center gap-x-2 capitalize">
-        <LoaderIcon />
+        <Loader2Icon />
         {MeetingStatus.Processing}
       </div>
     ),
