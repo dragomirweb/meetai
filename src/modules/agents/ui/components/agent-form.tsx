@@ -124,6 +124,7 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: Props) => {
               <FormLabel>Instructions</FormLabel>
               <FormControl>
                 <Textarea
+                  className="max-h-[400px] overflow-y-auto"
                   {...field}
                   placeholder="You are a helpful assistant..."
                 />
