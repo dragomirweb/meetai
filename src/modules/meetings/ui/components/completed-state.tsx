@@ -9,6 +9,7 @@ import {
   SparklesIcon,
 } from 'lucide-react'
 import Markdown from 'react-markdown'
+import rehypeSanitize from 'rehype-sanitize'
 
 import { Badge } from '@/components/ui/badge'
 import { GeneratedAvatar } from '@/components/ui/generated-avatar'
@@ -131,6 +132,7 @@ export const CompletedState = ({ data }: Props) => {
                       />
                     ),
                   }}
+                  rehypePlugins={[rehypeSanitize]}
                 >
                   {data.summary}
                 </Markdown>
