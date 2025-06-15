@@ -9,7 +9,7 @@ import {
   ClockArrowUpIcon,
   ClockFadingIcon,
   CornerDownRightIcon,
-  LoaderIcon,
+  Loader2Icon,
 } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
@@ -28,9 +28,9 @@ function formatDuration(seconds: number) {
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
-  active: LoaderIcon,
+  active: Loader2Icon,
   completed: CircleCheckIcon,
-  processing: LoaderIcon,
+  processing: Loader2Icon,
   cancelled: CircleXIcon,
 }
 
