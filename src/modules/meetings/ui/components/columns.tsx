@@ -2,7 +2,6 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
-import humanizeDuration from 'humanize-duration'
 import {
   CircleCheckIcon,
   CircleXIcon,
@@ -15,16 +14,8 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { GeneratedAvatar } from '@/components/ui/generated-avatar'
 
-import { cn } from '@/lib/utils'
+import { cn, formatDuration } from '@/lib/utils'
 import type { Meetings } from '@/modules/meetings/types'
-
-function formatDuration(seconds: number) {
-  return humanizeDuration(seconds * 1000, {
-    largest: 1,
-    units: ['h', 'm', 's'],
-    round: true,
-  })
-}
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
