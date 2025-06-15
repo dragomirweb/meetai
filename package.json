@@ -12,7 +12,8 @@
     "db:studio": "drizzle-kit studio",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "dev:ngrok": "ngrok http --url=evenly-curious-parrot.ngrok-free.app 3000"
+    "dev:ngrok": "ngrok http --url=evenly-curious-parrot.ngrok-free.app 3000",
+    "dev:inngest": "npx inngest-cli@latest dev"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
@@ -82,6 +83,7 @@
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^3.0.2",
     "recharts": "^2.15.3",
+    "rehype-sanitize": "^6.0.0",
     "server-only": "^0.0.1",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.0",
