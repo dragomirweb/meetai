@@ -1,7 +1,6 @@
-import { botttsNeutral, initials } from '@dicebear/collection'
-import { createAvatar } from '@dicebear/core'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 
+import { generateAvatarUri } from '@/lib/avatar'
 import { cn } from '@/lib/utils'
 
 type GeneratedAvatarProps = {
@@ -15,24 +14,13 @@ export const GeneratedAvatar = ({
   className,
   variant,
 }: GeneratedAvatarProps) => {
-  let avatar: ReturnType<typeof createAvatar>
-
-  if (variant === 'botttsNeutral') {
-    avatar = createAvatar(botttsNeutral, { seed })
-  } else {
-    avatar = createAvatar(initials, {
-      seed,
-      fontSize: 42,
-      fontWeight: 500,
-      radius: 100,
-    })
-  }
+  const avatarUri = generateAvatarUri(seed, variant)
 
   return (
     <Avatar
       className={cn('flex items-center justify-center text-center', className)}
     >
-      <AvatarImage src={avatar.toDataUri()} alt="Avatar" />
+      <AvatarImage src={avatarUri} alt="Avatar" />
       <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
   )
